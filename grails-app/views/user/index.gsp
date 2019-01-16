@@ -26,8 +26,7 @@
                     <th>Last Name</th>
                     <th>Mail</th>
                     <th>Tel</th>
-                    <th>Dob</th>
-                    <th>Date created</th>
+
                 </tr>
                 <g:each in="${userList}" var="user">
                     <tr>
@@ -36,8 +35,7 @@
                         <td>${user.lastName}</td>
                         <td>${user.mail}</td>
                         <td>${user.tel}</td>
-                        <td>${user.dob}</td>
-                        <td>${user.dateCreated}</td>
+
                     </tr>
                 </g:each>
             </table>

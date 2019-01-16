@@ -3,6 +3,7 @@ package fr.mbds.tp
 class UserMessage implements Serializable {
 
     User user
+    UserRole userRole
     Message message
 
     static constraints = {
@@ -18,4 +19,5 @@ class UserMessage implements Serializable {
         instance.save(flush: flush)
         instance
     }
+
 }

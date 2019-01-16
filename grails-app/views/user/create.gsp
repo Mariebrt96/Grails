@@ -27,7 +27,29 @@
             </g:hasErrors>
             <g:form resource="${this.user}" method="POST">
                 <fieldset class="form">
-                    <f:all bean="user"/>
+                    <div class='fieldcontain required'>
+                        <label for='password'>Password
+                            <span class='required-indicator'>*</span>
+                        </label><input type="password" name="password" required="" value="" id="password" />
+                    </div><div class='fieldcontain required'>
+                    <label for='username'>Username
+                        <span class='required-indicator'>*</span>
+                    </label><input type="text" name="username" value="" required="" id="username" />
+                </div><div class='fieldcontain required'>
+                    <label for='mail'>Mail
+                        <span class='required-indicator'>*</span>
+                    </label><input type="text" name="mail" value="" required="" id="mail" />
+                </div><div class='fieldcontain'>
+                    <label for='tel'>Tel</label><input type="text" name="tel" value="" id="tel" />
+                </div><div class='fieldcontain required'>
+                    <label for='firstName'>First Name
+                        <span class='required-indicator'>*</span>
+                    </label><input type="text" name="firstName" value="" required="" id="firstName" />
+                </div><div class='fieldcontain required'>
+                    <label for='lastName'>Last Name
+                        <span class='required-indicator'>*</span>
+                    </label><input type="text" name="lastName" value="" required="" id="lastName" />
+                </div><div class='fieldcontain'>
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
