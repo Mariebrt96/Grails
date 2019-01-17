@@ -48,7 +48,7 @@
                 <span id="lastName-label" class="property-label">Last Name</span>
                 <div class="property-value" aria-labelledby="lastName-label">last</div>
             </li>
-            
+
         </ol>
         <form action="/user/delete/2" method="post" ><input type="hidden" name="_method" value="DELETE" id="_method" />
             <fieldset class="buttons">

@@ -27,7 +27,23 @@
             </g:hasErrors>
             <g:form resource="${this.role}" method="POST">
                 <fieldset class="form">
-                    <f:all bean="role"/>
+                    <div class='fieldcontain required'>
+                        <label for='authority'>Authority
+                            <span class='required-indicator'>*</span>
+                        </label><input type="text" name="authority" value="" required="" id="authority" />
+                    </div>
+                    <div class='fieldcontain'>
+                        <label for='user'>Membre</label>
+                        <g:select
+                            name="user"
+                            from="${fr.mbds.tp.User.list()}"
+                            optionValue="username"
+                            optionKey="id"
+                            multiple="true"
+                            noSelection="['':'']"
+                        />
+                    </div>
+
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />

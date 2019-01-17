@@ -15,7 +15,12 @@ class RoleController {
     }
 
     def show(Long id) {
-        respond roleService.get(id)
+        def userRoleInstance = Role.get(id)
+        def roleInstance = UserRole.findAllByRole(userRoleInstance)
+        def listInstance = roleInstance.collect{it.user}
+
+       /* respond roleService.get(id)*/
+        respond userRoleInstance, model:[userList:listInstance]
     }
 
     def create() {
