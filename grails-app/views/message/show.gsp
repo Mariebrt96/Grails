@@ -22,27 +22,27 @@
             %{--<f:display bean="message" />--}%
             <ol class="property-list">
             <li class="fieldcontain">
-                <span id="messageContent-label" class="property-label">Message Content</span>
+                <span id="messageContent-label" class="property-label">Message</span>
                 <div class="property-value" aria-labelledby="messageContent-label">${message.messageContent}</div>
             </li>
 
             <li class="fieldcontain">
                 <span id="author-label" class="property-label">Author</span>
                 <div class="property-value" aria-labelledby="author-label">
-                    <g:link controller="user" action="show" id="${message.author.id}">${message.author.firstName} ${message.author.lastName}</g:link>
+                    <g:link controller="user" action="show" id="${message.author.id}">${message.author.username}</g:link>
                 </div>
             </li>
 
-            <li class="fieldcontain">
-                <span id="author-label" class="property-label">Destinataire</span>
-                <div class="property-value" aria-labelledby="author-label">
-                    <g:each in="${userList}" var="user">
-                        <g:link controller="user" action="show" id="${message.author.id}">
-                            ${user.firstName + " " + user.lastName},
-                        </g:link>
-                    </g:each>
-                </div>
-            </li>
+                <li class="fieldcontain">
+                    <span id="author-label" class="property-label">Destinataire</span>
+                    <div class="property-value" aria-labelledby="author-label">
+                        <g:each in="${userList}" var="user">
+                            ${user.username}
+                        </g:each>
+                    </div>
+                </li>
+
+
             </ol>
             <g:form resource="${this.message}" method="DELETE">
                 <fieldset class="buttons">

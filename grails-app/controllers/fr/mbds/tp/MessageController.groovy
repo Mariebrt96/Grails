@@ -22,13 +22,16 @@ class MessageController {
         def userList = userMessageList.collect{it.user}
         respond messageInstance,model:[userList:userList]
 
+
     }
 
     def create() {
+
         respond new Message(params)
     }
 
     def save(Message message) {
+        println params
         if (message == null) {
             notFound()
             return
@@ -37,8 +40,47 @@ class MessageController {
         try {
             messageService.save(message)
         } catch (ValidationException e) {
-            respond message.errors, view:'create'
+            respond message.errors, view: 'create'
             return
+        }
+
+        if (params.user != "" && params.role == ""){
+            def userInstance = User.get(params.user)
+            UserMessage.create(userInstance, message, true)
+        }
+
+        if(params.user == "" && params.role != "") {
+            def roleInstance = Role.get(params.role)
+            if (roleInstance) {
+                def userRoleInstance = UserRole.findAllByRole(roleInstance)
+                (userRoleInstance).each {
+                    def userInstance = User.get(it.user.id)
+                    if (userInstance) {
+                        UserMessage.create(userInstance, message, true)
+                    }
+                }
+
+            }
+        }
+        if(params.user != "" && params.role != "") {
+            def roleInstance = Role.get(params.role)
+            def i
+            i=0
+            if (roleInstance) {
+                def userRoleInstance = UserRole.findAllByRole(roleInstance)
+                def desInstance = User.get(params.user)
+                (userRoleInstance).each {
+                        def userInstance = User.get(it.user.id)
+                        if (userInstance) {
+                            UserMessage.create(userInstance, message, true)
+                            if (userInstance == desInstance)
+                                i++
+                        }
+
+                }
+                if (i == 0)
+                    UserMessage.create(desInstance, message, true)
+            }
         }
 
         request.withFormat {

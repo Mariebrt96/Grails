@@ -27,7 +27,40 @@
             </g:hasErrors>
             <g:form resource="${this.message}" method="POST">
                 <fieldset class="form">
-                    <f:all bean="message"/>
+                    <div class='fieldcontain required'>
+                        <label for='messageContent'>Message
+                            <span class='required-indicator'>*</span>
+                        </label><input type="textarea" name="messageContent" value="" required="" id="messageContent" />
+                    </div>
+                    <div class='fieldcontain'>
+                        <label for='author'>Author</label><g:select
+                            name="author"
+                            from="${fr.mbds.tp.User.list()}"
+                            optionValue="username"
+                            optionKey="id"
+                            noSelection="['':'']"
+                        />
+                    </div>
+                    <div class='fieldcontain'>
+                        <label for='user'>Destinataire</label>
+                        <g:select
+                            name="user"
+                            from="${fr.mbds.tp.User.list()}"
+                            optionValue="username"
+                            optionKey="id"
+                            noSelection="['':'']"
+                    />
+                        <label for='role'>Groupe de destinataires</label>
+                    <g:select
+                            name="role"
+                            from="${fr.mbds.tp.Role.list()}"
+                            optionValue="authority"
+                            optionKey="id"
+                            noSelection="['':'']"
+                    />
+                    </div>
+
+
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />

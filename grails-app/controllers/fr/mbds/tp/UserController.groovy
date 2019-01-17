@@ -13,10 +13,11 @@ class UserController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100) //si max est défini, il retourne la valeur du max sinon il retourne le minimum entre 10 et 100
-        respond userService.list(params), model:[userCount: userService.count()]
+        respond User.findAllByIsDelete(false,params), model:[userCount: userService.count()]
     }
 
     def show(Long id) {
+
         respond userService.get(id) //peuple la page
     }
 
@@ -78,7 +79,11 @@ class UserController {
             return
         }
 
-        userService.delete(id)
+        def userInstance = User.get(id)
+
+        userInstance.isDelete = true
+
+        userInstance.save(flush: true)
 
         request.withFormat {
             form multipartForm {

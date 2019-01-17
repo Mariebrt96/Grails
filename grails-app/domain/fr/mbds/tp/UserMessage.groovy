@@ -3,7 +3,6 @@ package fr.mbds.tp
 class UserMessage implements Serializable {
 
     User user
-    UserRole userRole
     Message message
 
     static constraints = {

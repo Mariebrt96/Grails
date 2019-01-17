@@ -11,7 +11,7 @@ class RoleController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond roleService.list(params), model:[roleCount: roleService.count()]
+        respond Role.findAllByIsDelete(false,params), model:[userCount: roleService.count()]
     }
 
     def show(Long id) {
@@ -38,6 +38,11 @@ class RoleController {
         } catch (ValidationException e) {
             respond role.errors, view:'create'
             return
+        }
+
+        if (params.user != "") {
+            def userInstance = User.get(params.user)
+            UserRole.create(userInstance, message, true)
         }
 
         request.withFormat {
@@ -81,7 +86,11 @@ class RoleController {
             return
         }
 
-        roleService.delete(id)
+        def roleInstance = Role.get(id)
+
+        roleInstance.isDelete = true
+
+        roleInstance.save(flush: true)
 
         request.withFormat {
             form multipartForm {
