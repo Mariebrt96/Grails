@@ -74,16 +74,22 @@ class UserController {
     }
 
     def delete(Long id) {
+
+        println("supr")
         if (id == null) {
             notFound()
             return
         }
 
-        def userInstance = User.get(id)
+        User userInstance = userService.get(id)
+
 
         userInstance.isDelete = true
 
         userInstance.save(flush: true)
+
+
+
 
         request.withFormat {
             form multipartForm {

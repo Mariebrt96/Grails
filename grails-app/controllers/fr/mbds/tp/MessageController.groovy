@@ -13,7 +13,7 @@ class MessageController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond messageService.list(params), model:[messageCount: messageService.count()]
+        respond Message.findAllByIsDelete(false,params), model:[userCount: messageService.count()]
     }
 
     def show(Long id) {
@@ -150,7 +150,13 @@ class MessageController {
             return
         }
 
-        messageService.delete(id)
+
+        def messageInstance = Message.get(id)
+
+        messageInstance.isDelete = true
+
+        messageInstance.save(flush: true)
+
 
         request.withFormat {
             form multipartForm {

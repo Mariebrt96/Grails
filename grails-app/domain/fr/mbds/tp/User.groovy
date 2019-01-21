@@ -18,7 +18,7 @@ class User implements Serializable {
     String mail
     String tel
     Date dob
-    boolean isDelete
+    Boolean isDelete
 
     Date dateCreated
     Date lastUpdated
