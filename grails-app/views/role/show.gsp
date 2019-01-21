@@ -22,14 +22,14 @@
 
                 <li class="fieldcontain">
                     <span id="authority-label" class="property-label">Authority</span>
-                    <div class="property-value" aria-labelledby="authority-label">ROLE_ADMIN</div>
+                    <div class="property-value" aria-labelledby="authority-label">${role.authority}</div>
                 </li>
 
                 <li class="fieldcontain">
                     <span id="user-name-label" class="property-label">User</span>
                     <div class="property-value" aria-labelledby="user-name-label">
                         <g:each in="${userList}" var="user">
-                            ${user.username + "" + user.lastName}
+                            ${user.username + "" }
                         </g:each>
                     </div>
                 </li>

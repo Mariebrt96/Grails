@@ -18,7 +18,17 @@
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:table collection="${roleList}" />
+            <table>
+                <tr>
+                    <th>Authority</th>
+
+                </tr>
+                <g:each in="${roleList}" var="role">
+                    <tr>
+                        <td><g:link controller="role" action="show" id="${role.id}">${role.authority}</g:link> </td>
+                    </tr>
+                </g:each>
+            </table>
 
             <div class="pagination">
                 <g:paginate total="${roleCount ?: 0}" />

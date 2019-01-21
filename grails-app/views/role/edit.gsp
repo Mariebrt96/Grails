@@ -32,7 +32,7 @@
                     <div class='fieldcontain required'>
                         <label for='authority'>Authority
                             <span class='required-indicator'>*</span>
-                        </label><input type="text" name="authority" value="ROLE_ADMIN" required="" id="authority" />
+                        </label><input type="text" name="authority" value="${role.authority}" required="" id="authority" />
                     </div>
                     <div class='fieldcontain required'>
                         <label for='user'>Membre</label>

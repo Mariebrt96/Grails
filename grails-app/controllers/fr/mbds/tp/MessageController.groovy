@@ -22,7 +22,6 @@ class MessageController {
         def userList = userMessageList.collect{it.user}
         respond messageInstance,model:[userList:userList]
 
-
     }
 
     def create() {

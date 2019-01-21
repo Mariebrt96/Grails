@@ -75,7 +75,6 @@ class UserController {
 
     def delete(Long id) {
 
-        println("supr")
         if (id == null) {
             notFound()
             return
@@ -87,8 +86,6 @@ class UserController {
         userInstance.isDelete = true
 
         userInstance.save(flush: true)
-
-
 
 
         request.withFormat {

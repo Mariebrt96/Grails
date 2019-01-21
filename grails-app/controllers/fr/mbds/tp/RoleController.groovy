@@ -34,15 +34,18 @@ class RoleController {
         }
 
         try {
+            //créer un userrole, récupérer le user
             roleService.save(role)
         } catch (ValidationException e) {
             respond role.errors, view:'create'
             return
         }
 
-        if (params.user != "") {
-            def userInstance = User.get(params.user)
-            UserRole.create(userInstance, message, true)
+        if (params.user !=""){
+            (params.user).each{
+                def userInstance = User.get(it)
+                UserRole.create(userInstance, role, true)
+            }
         }
 
         request.withFormat {
@@ -70,6 +73,13 @@ class RoleController {
             respond role.errors, view:'edit'
             return
         }
+
+
+        (params.user).each{
+                def userInstance = User.get(it)
+                UserRole.create(userInstance, role, true)
+            }
+
 
         request.withFormat {
             form multipartForm {
