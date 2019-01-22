@@ -19,7 +19,7 @@ class ApiController {
                     if (messageInstance) {
                         reponseFormat(messageInstance, request)
                     } else
-                        response.status = 404
+                        render(status: 404, text: "message inexistant")
                 } else //on doit retourner la liste de tous les messages
                 {
                     forward action: "messages"
@@ -55,94 +55,9 @@ class ApiController {
                     if (messageInstance.save(flush: true))
                         render(status: 200, text: "Mise à jour effectuée pour le message ${messageInstance.id}")
                     else
-                        render(status: 400, text: "Mise à jour effectuée pour le message ${messageInstance.id}")
+                        render(status: 400, text: "La mise à jour n'a pas pu être effectuée pour le message ${messageInstance.id}")
                 } else
                     render(status: 404, text: "Le message désigné est introuvable")
-                break
-
-            default:
-                response.status = 405
-                break
-        }
-
-    }
-
-    def user() {
-        switch (request.getMethod()) {
-            case "GET":
-                if (params.id) //on doit retourner une instance de user
-                {
-                    def userInstance = User.get(params.id)
-                    if (userInstance) {
-                        reponseFormat(userInstance, request)
-                    }
-                } else //on doit retourner la liste de tous les users
-                {
-                    forward(action: "users")
-                }
-                break
-            case "POST":
-                forward action: "users"
-                break
-            case "DELETE":
-                def userInstance = params.id ? User.get(params.id) : null
-                if (userInstance) {
-                    userInstance.isDelete = true
-                    if (userInstance.save(flush: true))
-                        render(status: 200, text: "utilisateur effacé")
-                    else
-                        render(status: 400, text: "utilisateur introuvable")
-                }
-                break
-
-            case "PUT":
-                def userInstance = params.id ? User.get(params.id) : null
-                if (userInstance) {
-                    if (params.password)
-                        userInstance.password = params.password
-                    if (userInstance.save(flush: true))
-                        render(status: 200, text: "Mise à jour effectuée pour le mot de passe de ${userInstance.id}")
-                    else
-                        render(status: 400, text: "Mise à jour effectuée pour le mot de passe de ${userInstance.id}")
-
-                    if (params.username)
-                        userInstance.username = params.username
-                    if (userInstance.save(flush: true))
-                        render(status: 200, text: "Mise à jour effectuée pour le nom d'utilisateur de ${userInstance.id}")
-                    else
-                        render(status: 400, text: "Mise à jour effectuée pour le nom d'utilisateur de ${userInstance.id}")
-
-                    if (params.mail)
-                        userInstance.mail = params.mail
-                    if (userInstance.save(flush: true))
-                        render(status: 200, text: "Mise à jour effectuée pour le mail de ${userInstance.id}")
-                    else
-                        render(status: 400, text: "Mise à jour effectuée pour le mail de ${userInstance.id}")
-
-                    if (params.tel)
-                        userInstance.tel = params.tel
-                    if (userInstance.save(flush: true))
-                        render(status: 200, text: "Mise à jour effectuée pour le tel de ${userInstance.id}")
-                    else
-                        render(status: 400, text: "Mise à jour effectuée pour le tel de ${userInstance.id}")
-
-                    if (params.firstName)
-                        userInstance.firstName = params.firstName
-                    if (userInstance.save(flush: true))
-                        render(status: 200, text: "Mise à jour effectuée pour le prénom de ${userInstance.id}")
-                    else
-                        render(status: 400, text: "Mise à jour effectuée pour le prénom de ${userInstance.id}")
-
-                    if (params.lastName)
-                        userInstance.lastName = params.lastName
-
-                    if (userInstance.save(flush: true))
-                        render(status: 200, text: "Mise à jour effectuée pour le nom de famille de ${userInstance.id}")
-                    else
-                        render(status: 400, text: "Mise à jour effectuée pour le nom de famille de ${userInstance.id}")
-
-                } else
-                    render(status: 404, text: "L'utilisateur désigné est introuvable")
                 break
 
             default:
@@ -161,18 +76,107 @@ class ApiController {
                 //vérifier l'auteur
                 def authorInstance = params.author.id ? User.get(params.author.id) : null
                 def messageInstance
-                if (authorInstance) {
-                    messageInstance = new Message(author: authorInstance, messageContent: params.messageContent)
-                    if (messageInstance.save(flush: true))
-                        render(status: 201)
+                if (params.author.id) {
+                    if (authorInstance) {
+                        if (params.messageContent) {
+                            messageInstance = new Message(author: authorInstance, messageContent: params.messageContent)
+                            if (messageInstance.save(flush: true))
+                                render(status: 201, text: "Message posté")
+                            else
+                                render(status: 404, text: "Erreur")
+                        } else
+                            render(status: 400, text: "Le message n'est pas précisé")
+
+                    } else
+                        render (status: 400, text: "Auteur inexistant")
                 }
+                else
+                    render(status: 400, text: "L'auteur n'est pas précisé")
 
-
-                if (response.status != 201)
-                    response.status = 400
                 break;
         }
     }
+
+    def user() {
+        switch (request.getMethod()) {
+            case "GET":
+                if (params.id) //on doit retourner une instance de user
+                {
+                    def userInstance = User.get(params.id)
+                    if (userInstance) {
+                        reponseFormat(userInstance, request)
+                    }else
+                        render(status: 404, text: "utilisateur inexistant")
+                } else //on doit retourner la liste de tous les users
+                {
+                    forward(action: "users")
+                }
+                break
+            case "POST":
+                forward action: "users"
+                break
+            case "DELETE":
+                def userInstance = params.id ? User.get(params.id) : null
+                if (userInstance) {
+                    userInstance.isDelete = true
+                    if (userInstance.save(flush: true))
+                        render(status: 200, text: "utilisateur effacé")
+                }else
+                        render(status: 400, text: "utilisateur introuvable")
+
+                break
+
+            case "PUT":
+                def userInstance = params.id ? User.get(params.id) : null
+                if (userInstance) {
+                    if (params.password) {
+                        userInstance.password = params.password
+                        if (userInstance.save(flush: true))
+                            render(status: 200, text: "Mise à jour effectuée pour le mot de passe de ${userInstance.id} ")
+                    }
+
+                    if (params.username) {
+                        userInstance.username = params.username
+                        if (userInstance.save(flush: true))
+                            render(status: 200, text: "Mise à jour effectuée pour le nom d'utilisateur de ${userInstance.id} ")
+                    }
+
+                    if (params.mail) {
+                        userInstance.mail = params.mail
+                        if (userInstance.save(flush: true))
+                            render(status: 200, text: "Mise à jour effectuée pour le mail de ${userInstance.id} ")
+                    }
+
+                    if (params.tel) {
+                        userInstance.tel = params.tel
+                        if (userInstance.save(flush: true))
+                            render(status: 200, text: "Mise à jour effectuée pour le tel de ${userInstance.id} ")
+                    }
+
+                    if (params.firstName) {
+                        userInstance.firstName = params.firstName
+                        if (userInstance.save(flush: true))
+                            render(status: 200, text: "Mise à jour effectuée pour le prénom de ${userInstance.id} ")
+                    }
+
+                    if (params.lastName) {
+                        userInstance.lastName = params.lastName
+                        if (userInstance.save(flush: true))
+                            render(status: 200, text: "Mise à jour effectuée pour le nom de famille de ${userInstance.id} ")
+                    }
+
+
+                } else
+                    render(status: 404, text: "L'utilisateur désigné est introuvable")
+                break
+
+            default:
+                response.status = 405
+                break
+        }
+
+    }
+
 
     def users() {
         switch (request.getMethod()) {
@@ -185,11 +189,12 @@ class ApiController {
                 //créer un user
                 userInstance = new User(password: params.password, username: params.username, mail: params.mail, tel: params.tel, firstName: params.firstName,
                         lastName: params.lastName)
-                if (userInstance.save(flush: true))
-                    render(status: 201)
+
+                if(userInstance.save(flush: true))
+                    render(status: 201, text: "Utilisateur enregistré")
 
                 if (response.status != 201)
-                    response.status = 400
+                    render(status: 400, text: "Données oubliées ou déjà utilisées")
                 break
         }
     }
@@ -219,7 +224,8 @@ class ApiController {
                         render(status: 404, text: "Le message ${params.messageid} n'existe pas")
                     }
 
-                } else {
+                }
+                else{
                     def authorIns = params.author.id ? User.get(params.author.id) : null
                     if (authorIns) {
                         def messageIns = new Message(author: authorIns, messageContent: params.messageContent)
@@ -240,13 +246,21 @@ class ApiController {
                             } else {
                                 render(status: 400, text: "Le paramètre userid n'est pas précisé")
                             }
-                        }
+                        } else
+                            render(status: 404, text: "Oubli du message")
 
                     } else {
-                        render(status: 400, text: "Auteur inexistant")
+                        render(status: 404, text: "Auteur inexistant")
                     }
                 }
+
+
+
+            default:
+                response.status = 405
+                break
         }
+
     }
 
     def messageToGroup() {
@@ -267,23 +281,21 @@ class ApiController {
                                             render(status: 201, text: "Message bien adressé")
                                         else
                                             render(status: 400, text: "Erreur")
-
-                                    } else {
-                                        render(status: 404, text: "le groupe ${params.userid} n'existe pas ")
                                     }
                                 }
-
-                            } else {
-                                render(status: 404, text: "le groupe ${params.roleid} n'existe pas ")
+                            } else{
+                                    render(status:404, text:"Le groupe ${params.roleid} n'existe pas" )
                             }
-                        } else {
-                            render(status: 400, text: "Le paramètre roleid n'est pas précisé")
-                        }
-                    } else {
-                        render(status: 404, text: "Le message ${params.messageid} n'existe pas")
-                    }
 
-                } else {
+                        } else {
+                                render(status: 400, text: "le paramètre roleid n'est pas précisé ")
+                            }
+                    } else {
+                            render(status: 404, text: "Le message ${params.messageid}  n'existe pas")
+                        }
+                }
+
+                 else {
                     def authorIns = params.author.id ? User.get(params.author.id) : null
                     if (authorIns) {
                         def messageIns = new Message(author: authorIns, messageContent: params.messageContent)
@@ -324,6 +336,10 @@ class ApiController {
                         render(status: 400, text: "Auteur inexistant")
                     }
                 }
+
+            default:
+                response.status = 405
+                break
         }
     }
 
