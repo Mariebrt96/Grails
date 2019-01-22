@@ -12,8 +12,8 @@ class MessageController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Message.findAllByIsDelete(false,params), model:[userCount: messageService.count()]
+        params.max = Math.min(max ?: 10, 100) //si max est défini, il retourne la valeur du max sinon il retourne le minimum entre 10 et 100
+        respond Message.findAllByIsDelete(false,params), model:[messageCount: messageService.count()]
     }
 
     def show(Long id) {

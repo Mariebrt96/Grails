@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
+        <g:set var="entityName" value="${message(code: 'user.label', default: 'Users')}" />
         <title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
     <body>
@@ -21,13 +21,13 @@
         %{--<f:table collection="${userList}" />--}%
             <table>
                 <tr>
-                    <th>Username</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Mail</th>
-                    <th>Tel</th>
-
+                    <th>Nom d'utilisateur</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Adresse mail</th>
+                    <th>Numéro de téléphone</th>
                 </tr>
+
                 <g:each in="${userList}" var="user">
                     <tr>
                         <td><g:link controller="user" action="show" id="${user.id}">${user.username}</g:link> </td>
@@ -39,8 +39,6 @@
                     </tr>
                 </g:each>
             </table>
-
-
             <div class="pagination">
                 <g:paginate total="${userCount ?: 0}" />
             </div>

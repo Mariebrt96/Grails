@@ -30,12 +30,7 @@
                 <g:hiddenField name="version" value="${this.message?.version}" />
                 <fieldset class="form">
                     <f:all bean="message"/>
-                    <g:select
-                        name="test"
-                        from="${fr.mbds.tp.User.list()}"
-                        optionValue="username"
-                        optionKey="id"
-                    />
+
                 </fieldset>
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />

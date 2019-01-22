@@ -15,13 +15,22 @@
         </div>
         <div id="list-message" class="content scaffold-list" role="main">
             <h1><g:message code="default.list.label" args="[entityName]" /></h1>
-
-
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:table collection="${messageList}" />
+            <table>
+                <tr>
+                    <th>Message</th>
+                    <th>Auteur</th>
 
+                </tr>
+                <g:each in="${messageList}" var="message">
+                    <tr>
+                        <td><g:link controller="message" action="show" id="${message.id}">${message.messageContent}</g:link> </td>
+                        <td>${message.author.username}</td>
+                    </tr>
+                </g:each>
+            </table>
             <div class="pagination">
                 <g:paginate total="${messageCount ?: 0}" />
             </div>

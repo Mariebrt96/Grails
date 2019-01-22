@@ -22,32 +22,32 @@
             <ol class="property-list user">
 
                 <li class="fieldcontain">
-                    <span id="password-label" class="property-label">Password</span>
+                    <span id="password-label" class="property-label">Mot de passe</span>
                     <div class="property-value" aria-labelledby="password-label">${user.password}</div>
                 </li>
 
                 <li class="fieldcontain">
-                    <span id="username-label" class="property-label">Username</span>
+                    <span id="username-label" class="property-label">Nom d'utilisateur</span>
                     <div class="property-value" aria-labelledby="username-label">${user.username}</div>
                 </li>
 
                 <li class="fieldcontain">
-                    <span id="mail-label" class="property-label">Mail</span>
+                    <span id="mail-label" class="property-label">Adresse mail</span>
                     <div class="property-value" aria-labelledby="mail-label">${user.mail}</div>
                 </li>
 
                 <li class="fieldcontain">
-                    <span id="tel-label" class="property-label">Tel</span>
+                    <span id="tel-label" class="property-label">Numéro de téléphone</span>
                     <div class="property-value" aria-labelledby="tel-label">${user.tel}</div>
                 </li>
 
                 <li class="fieldcontain">
-                    <span id="firstName-label" class="property-label">First Name</span>
+                    <span id="firstName-label" class="property-label">Prénom</span>
                     <div class="property-value" aria-labelledby="firstName-label">${user.firstName}</div>
                 </li>
 
                 <li class="fieldcontain">
-                    <span id="lastName-label" class="property-label">Last Name</span>
+                    <span id="lastName-label" class="property-label">Nom</span>
                     <div class="property-value" aria-labelledby="lastName-label">${user.lastName}</div>
                 </li>
 

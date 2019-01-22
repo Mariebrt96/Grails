@@ -30,12 +30,13 @@
                 <g:hiddenField name="version" value="${this.role?.version}" />
                 <fieldset class="form">
                     <div class='fieldcontain required'>
-                        <label for='authority'>Authority
+                        <label for='authority'>Nom du groupe
                             <span class='required-indicator'>*</span>
-                        </label><input type="text" name="authority" value="${role.authority}" required="" id="authority" />
+                        </label>
+                        <input type="text" name="authority" value="${role.authority}" required="" id="authority" />
                     </div>
                     <div class='fieldcontain required'>
-                        <label for='user'>Membre</label>
+                        <label for='user'>Membres</label>
                         <g:select
                                 name="user"
                                 from="${fr.mbds.tp.User.list()}"

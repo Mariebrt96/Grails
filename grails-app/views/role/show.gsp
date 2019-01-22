@@ -16,17 +16,17 @@
             </ul>
         </div>
         <div id="show-role" class="content scaffold-show" role="main">
-            <h1>Show Role</h1>
+            <h1>Groupe : ${role.authority}</h1>
 
             <ol class="property-list role">
 
                 <li class="fieldcontain">
-                    <span id="authority-label" class="property-label">Authority</span>
+                    <span id="authority-label" class="property-label">Nom du groupe</span>
                     <div class="property-value" aria-labelledby="authority-label">${role.authority}</div>
                 </li>
 
                 <li class="fieldcontain">
-                    <span id="user-name-label" class="property-label">User</span>
+                    <span id="user-name-label" class="property-label">Membres</span>
                     <div class="property-value" aria-labelledby="user-name-label">
                         <g:each in="${userList}" var="user">
                             ${user.username + "" }

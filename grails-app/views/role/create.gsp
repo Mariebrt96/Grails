@@ -28,12 +28,13 @@
             <g:form resource="${this.role}" method="POST">
                 <fieldset class="form">
                     <div class='fieldcontain required'>
-                        <label for='authority'>Authority
+                        <label for='authority'>Nom du groupe
                             <span class='required-indicator'>*</span>
-                        </label><input type="text" name="authority" value="" required="" id="authority" />
+                        </label>
+                        <input type="text" name="authority" value="" required="" id="authority" />
                     </div>
                     <div class='fieldcontain'>
-                        <label for='user'>Membre</label>
+                        <label for='user'>Membres</label>
                         <g:select
                             name="user"
                             from="${fr.mbds.tp.User.list()}"

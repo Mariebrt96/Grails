@@ -30,28 +30,44 @@
                 <g:hiddenField name="version" value="${this.user?.version}" />
                 <fieldset class="form">
                     <div class='fieldcontain required'>
-                        <label for='password'>Password
+                        <label for='password'>Mot de passe
                             <span class='required-indicator'>*</span>
-                        </label><input type="password" name="password" required="" value="${user.password}" id="password" />
-                    </div><div class='fieldcontain required'>
-                    <label for='username'>Username
-                        <span class='required-indicator'>*</span>
-                    </label><input type="text" name="username" value="${user.username}" required="" id="username" />
-                </div><div class='fieldcontain required'>
-                    <label for='mail'>Mail
-                        <span class='required-indicator'>*</span>
-                    </label><input type="text" name="mail" value="${user.mail}" required="" id="mail" />
+                        </label>
+                        <input type="password" name="password" required="" value="${user.password}" id="password" />
+                    </div>
 
-                </div><div class='fieldcontain'>
-                    <label for='tel'>Tel</label><input type="text" name="tel" value="${user.tel}" id="tel" />
-                </div><div class='fieldcontain required'>
-                    <label for='firstName'>First Name
+                    <div class='fieldcontain required'>
+                    <label for='username'>Nom d'utilisateur
                         <span class='required-indicator'>*</span>
-                    </label><input type="text" name="firstName" value="${user.firstName}" required="" id="firstName" />
-                </div><div class='fieldcontain required'>
-                    <label for='lastName'>Last Name
+                    </label>
+                        <input type="text" name="username" value="${user.username}" required="" id="username" />
+                    </div>
+
+                    <div class='fieldcontain required'>
+                    <label for='mail'>Adresse mail
                         <span class='required-indicator'>*</span>
-                    </label><input type="text" name="lastName" value="${user.lastName}" required="" id="lastName" />
+                    </label>
+                        <input type="text" name="mail" value="${user.mail}" required="" id="mail" />
+                    </div>
+
+                    <div class='fieldcontain'>
+                        <label for='tel'>Numéro de téléphone</label>
+                        <input type="text" name="tel" value="${user.tel}" id="tel" />
+                    </div>
+
+                    <div class='fieldcontain required'>
+                        <label for='firstName'>Prénom
+                             <span class='required-indicator'>*</span>
+                        </label>
+                        <input type="text" name="firstName" value="${user.firstName}" required="" id="firstName" />
+                    </div>
+
+                    <div class='fieldcontain required'>
+                    <label for='lastName'>Nom
+                        <span class='required-indicator'>*</span>
+                    </label>
+                        <input type="text" name="lastName" value="${user.lastName}" required="" id="lastName" />
+
                 </fieldset>
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />

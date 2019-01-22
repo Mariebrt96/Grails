@@ -20,7 +20,7 @@
             </g:if>
             <table>
                 <tr>
-                    <th>Authority</th>
+                    <th>Nom du groupe</th>
 
                 </tr>
                 <g:each in="${roleList}" var="role">

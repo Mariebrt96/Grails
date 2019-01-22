@@ -33,7 +33,7 @@
                         </label><input type="textarea" name="messageContent" value="" required="" id="messageContent" />
                     </div>
                     <div class='fieldcontain'>
-                        <label for='author'>Author</label><g:select
+                        <label for='author'>Auteur</label><g:select
                             name="author"
                             from="${fr.mbds.tp.User.list()}"
                             optionValue="username"
